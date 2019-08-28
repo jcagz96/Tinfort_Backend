@@ -1,6 +1,4 @@
-const axios = require('axios');
 const Profile = require('../models/Profile');
-const jwt =  require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 module.exports = {

@@ -61,4 +61,4 @@ module.exports = {
             cb(new Error('Invalid file type'))
         }
     }
-}
+} 
