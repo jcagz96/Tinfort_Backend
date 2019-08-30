@@ -3,101 +3,90 @@ const axios = require('axios')
 module.exports = {
     async show(req, res){
         const { username } = req.body;
+        const { plataform } = req.body;
 
         console.log(`\n[ FortniteApiController.js ] : username é: ${username}`)
+        console.log(`\n[ FortniteApiController.js ] : plataforma é: ${plataform}`)
         
-    
-        const responseUid =  await axios({
-            method: 'post',
-            url: `${process.env.FORTNITE_API_URL}/users/id?username=${username}`,
+        var response =  await axios({
+            method: 'get',
+            url: `${process.env.FORTNITE_API_URL}/v1/profile/${plataform}/${username}`,
             headers: { 
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                'authorization': `${process.env.FORTNITE_TOKEN_SECRET}` 
+                'TRN-Api-Key': `${process.env.FORTNITE_TRN_API_KEY}`
             }
         })
 
-        const id = responseUid.data.data["uid"];
+        if(response.data.error === "Player Not Found"){
+            console.log(`\n[ FortniteApiController.js ] : Utilizador com as stats privadas\n`)
 
-        console.log(`->>>>>>>  ${responseUid.data}`)
-
-        console.log(`[ FortniteApiController.js ] : ID: ${id}\n`)
-
-
-        const responseStatsV2 =  await axios({
-            method: 'post',
-            url: `${process.env.FORTNITE_API_URL}/prod09/users/public/br_stats_v2?user_id=${id}`,
-            headers: { 
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                'authorization': `${process.env.FORTNITE_TOKEN_SECRET}` 
-            }
-        })
+            response =  await axios({
+                method: 'get',
+                url: `${process.env.FORTNITE_API_URL}/v1/profile/${plataform}/${plataform}(${username})`,
+                headers: { 
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    'TRN-Api-Key': `${process.env.FORTNITE_TRN_API_KEY}`
+                }
+            })
+        }
 
         
-        const duosWins = responseStatsV2.data.data.stats.keyboardmouse[0].entries[0].stats.placetop1;
-        const duosGames = responseStatsV2.data.data.stats.keyboardmouse[0].entries[0].stats.matchesplayed;
-        const duosWinRate = (duosWins / duosGames) * 100;
-        const duosKills = responseStatsV2.data.data.stats.keyboardmouse[0].entries[0].stats.kills;
-        const duosDeaths = duosGames - duosWins;
-        const duosKillsDeathsWinRate = duosKills / duosDeaths;
-
-
-
-
-        console.log(`[ FortniteApiController.js ] : duos: ${responseStatsV2.data.data.stats.keyboardmouse[0].id}`)
-        console.log(`[ FortniteApiController.js ] : duos-->wins: ${duosWins}`)
-        console.log(`[ FortniteApiController.js ] : duos-->games: ${duosGames}`)
-        console.log(`[ FortniteApiController.js ] : duos-->win rate: ${duosWinRate}`)
-        console.log(`[ FortniteApiController.js ] : duos-->kills: ${duosKills}`)
-        console.log(`[ FortniteApiController.js ] : duos-->deaths: ${duosDeaths}`)
-        console.log(`[ FortniteApiController.js ] : duos-->Kill / Death rate: ${duosKillsDeathsWinRate}\n`)
-
-
 
         
-        const squadsWins = responseStatsV2.data.data.stats.keyboardmouse[9].entries[0].stats.placetop1;
-        const squadsGames = responseStatsV2.data.data.stats.keyboardmouse[9].entries[0].stats.matchesplayed;
-        const squadsWinRate = (squadsWins / squadsGames) * 100;
-        const squadsKills = responseStatsV2.data.data.stats.keyboardmouse[9].entries[0].stats.kills;
-        const squadsDeaths = squadsGames - squadsWins;
-        const squadsKillsDeathsWinRate = squadsKills / squadsDeaths;
+        const soloWins = response.data.stats.p2.top1.value;
+        const soloGames = response.data.stats.p2.matches.value;
+        const soloWinRate = response.data.stats.p2.winRatio.value;
+        const soloKills = response.data.stats.p2.kills.value;
+        const soloKillsDeathsWinRate = response.data.stats.p2.kd.value;
+        
 
 
-        console.log(`[ FortniteApiController.js ] : squads: ${responseStatsV2.data.data.stats.keyboardmouse[0].id}`)
-        console.log(`[ FortniteApiController.js ] : squads-->wins: ${squadsWins}`)
-        console.log(`[ FortniteApiController.js ] : squads-->games: ${squadsGames}`)
-        console.log(`[ FortniteApiController.js ] : squads-->win rate: ${squadsWinRate}`)
-        console.log(`[ FortniteApiController.js ] : squads-->kills: ${squadsKills}`)
-        console.log(`[ FortniteApiController.js ] : squads-->deaths: ${squadsDeaths}`)
-        console.log(`[ FortniteApiController.js ] : squads-->Kill / Death rate: ${squadsKillsDeathsWinRate}\n`)
-
-
-
-        const soloWins = responseStatsV2.data.data.stats.keyboardmouse[29].entries[0].stats.placetop1;
-        const soloGames = responseStatsV2.data.data.stats.keyboardmouse[29].entries[0].stats.matchesplayed;
-        const soloWinRate = (soloWins / soloGames) * 100;
-        const soloKills = responseStatsV2.data.data.stats.keyboardmouse[29].entries[0].stats.kills;
-        const soloDeaths = soloGames - soloWins;
-        const soloKillsDeathsWinRate = soloKills / soloDeaths;
-
-
-        console.log(`[ FortniteApiController.js ] : solo: ${responseStatsV2.data.data.stats.keyboardmouse[0].id}`)
         console.log(`[ FortniteApiController.js ] : solo-->wins: ${soloWins}`)
         console.log(`[ FortniteApiController.js ] : solo-->games: ${soloGames}`)
         console.log(`[ FortniteApiController.js ] : solo-->win rate: ${soloWinRate}`)
         console.log(`[ FortniteApiController.js ] : solo-->kills: ${soloKills}`)
-        console.log(`[ FortniteApiController.js ] : solo-->deaths: ${soloDeaths}`)
         console.log(`[ FortniteApiController.js ] : solo-->Kill / Death rate: ${soloKillsDeathsWinRate}\n`)
 
 
+        const duosWins = response.data.stats.p10.top1.value;
+        const duosGames = response.data.stats.p10.matches.value;
+        const duosWinRate = response.data.stats.p10.winRatio.value;
+        const duosKills = response.data.stats.p10.kills.value;
+        const duosKillsDeathsWinRate = response.data.stats.p10.kd.value;
+        
+
+
+        console.log(`[ FortniteApiController.js ] : duos-->wins: ${duosWins}`)
+        console.log(`[ FortniteApiController.js ] : duos-->games: ${duosGames}`)
+        console.log(`[ FortniteApiController.js ] : duos-->win rate: ${duosWinRate}`)
+        console.log(`[ FortniteApiController.js ] : duos-->kills: ${duosKills}`)
+        console.log(`[ FortniteApiController.js ] : duos-->Kill / Death rate: ${duosKillsDeathsWinRate}\n`)
+
+
+        const squadsWins = response.data.stats.p9.top1.value;
+        const squadsGames = response.data.stats.p9.matches.value;
+        const squadsWinRate = response.data.stats.p9.winRatio.value;
+        const squadsKills = response.data.stats.p9.kills.value;
+        const squadsKillsDeathsWinRate = response.data.stats.p9.kd.value;
+        
+
+
+        console.log(`[ FortniteApiController.js ] : squads-->wins: ${squadsWins}`)
+        console.log(`[ FortniteApiController.js ] : squads-->games: ${squadsGames}`)
+        console.log(`[ FortniteApiController.js ] : squads-->win rate: ${squadsWinRate}`)
+        console.log(`[ FortniteApiController.js ] : squads-->kills: ${squadsKills}`)
+        console.log(`[ FortniteApiController.js ] : squads-->Kill / Death rate: ${squadsKillsDeathsWinRate}\n`)
+        
+        
         const info = {
+            plataform,
             solo: {
                 soloWins,
                 soloGames,
                 soloWinRate,
                 soloKills,
-                soloDeaths,
                 soloKillsDeathsWinRate
             },
             duos: {
@@ -105,7 +94,6 @@ module.exports = {
                 duosGames,
                 duosWinRate,
                 duosKills,
-                duosDeaths,
                 duosKillsDeathsWinRate
             },
             squads: {
@@ -113,14 +101,11 @@ module.exports = {
                 squadsGames,
                 squadsWinRate,
                 squadsKills,
-                squadsDeaths,
                 squadsKillsDeathsWinRate
             }
         }
-
         
-
-        //res.json(responseStatsV2.data.data.stats.keyboardmouse)
+        
         res.json(info)
     }
 }

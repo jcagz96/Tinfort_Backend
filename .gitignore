@@ -4,3 +4,5 @@ node_modules/
 # dotenv environment variables file
 .env
 
+# ficheiro de notas
+notas.txt
