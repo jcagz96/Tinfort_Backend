@@ -17,6 +17,10 @@ const ProfileSchema = new mongoose.Schema ({
         type: String,
         required: true,
     },
+    plataform: {
+        type: String,
+        required: true,
+    },
     profilePicUrl: {
         type: String,
         default: ""
