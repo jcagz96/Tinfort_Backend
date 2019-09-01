@@ -11,7 +11,7 @@ module.exports = {
 
         console.log(`[ RegisterController.js ]  -  ${name},  ${email}  ,  ${fortniteUsername} , ${password}  ,  ${profilePicUrl} , ${plataform}`);
 
-        var errors =  [];
+        var errors = {};
 
         let fortniteAPI = new Fortnite(
             [
@@ -26,7 +26,7 @@ module.exports = {
             console.log(`[ RegisterController.js ]  -  Login Bem sucedido, logo a conta existe`)
         }).catch((error)=>{
             console.log(`[ RegisterController.js ]  -  Login Falhou, logo esta ou nao existe ou tem as credenciais erradas`)
-            errors.push({"error" : "login failed | cause: bad credentials maybe"})
+            errors['errorLoginFailed'] = "login failed | cause: bad credentials maybe";
         })
 
         const url = `${process.env.APP_URL}/finduser`
@@ -38,18 +38,15 @@ module.exports = {
 
 
         if(response.data.error === "Player Not Found"){
-            errors.push({"error" : "username not found"})
+            errors['errorUsername'] = "username not found";
         }
         else{
             console.log(`[ RegisterController.js ]  -  o username: ${fortniteUsername} existe`)
         }
 
-        if(errors.length>0){
-            for (var i = 0; i < errors.length; i++) { 
-                console.log(`[ RegisterController.js ]  -  ${errors[i].error}`);
-            }
+        if(Object.keys(errors).length > 0){
 
-            return res.json({errors: errors})
+            return res.json(errors)
         }
         else{
             console.log(`[ RegisterController.js ]  -   0 errors`)

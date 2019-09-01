@@ -44,7 +44,7 @@ module.exports = {
     dest: path.resolve(__dirname, '..', '..', 'tmp','uploads'),  //dirname refere-se ao diretorio config, e eu quero que as imagens descam 2 niveis de pastas, e que abram a pasta tmp e a pasta uploads
     storage: storageTypes[process.env.STORAGE_TYPE],                              // storageTypes["local"] armazenamento local |  storageTypes["s3"]  armazenamento na amazon
     limits: {                                           //para definir tamanho maximo dos arquivos
-        fileSize: 2 * 1024 * 1024,      //2 megabytes
+        fileSize: 80 * 1024 * 1024,      //2 megabytes
     },
     fileFilter: (req, file, cb) => {                               //para definir o tipo/extensao do arquivo //file é o arquivo //cb é o callback , é uma funcao que vamos chamar assim que terminar a verificação
         const allowedMimes = [

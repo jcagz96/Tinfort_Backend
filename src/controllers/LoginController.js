@@ -10,6 +10,8 @@ module.exports = {
 
         if( !user ) return res.status(400).send('Email was not found');
 
+        
+
         //password is correct
         const validPass = await bcrypt.compare(req.body.password, user.password);  //checking if the passed password is equal to the one in the database
         if(!validPass) return res.status(400).send('Invalid password');
