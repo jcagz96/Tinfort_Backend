@@ -16,7 +16,7 @@ const storageTypes = {
                     
                 }
                 
-                file.key = `${hash.toString('hex')}-${file.originalname}`            // gerando uma concatenaçao entre carateres aleatorio e o nome da imagem enviada
+                file.key = `${hash.toString('hex')}_${file.originalname}`
                 cb(null, file.key);
             })
         },
@@ -33,7 +33,7 @@ const storageTypes = {
                     
                 }
                 
-                const fileName = `${hash.toString('hex')}-${file.originalname}`            // gerando uma concatenaçao entre carateres aleatorio e o nome da imagem enviada
+                const fileName = `${hash.toString('hex')}_${file.originalname}`            // gerando uma concatenaçao entre carateres aleatorio e o nome da imagem enviada
                 cb(null, fileName);
             })
         }
@@ -44,7 +44,7 @@ module.exports = {
     dest: path.resolve(__dirname, '..', '..', 'tmp','uploads'),  //dirname refere-se ao diretorio config, e eu quero que as imagens descam 2 niveis de pastas, e que abram a pasta tmp e a pasta uploads
     storage: storageTypes[process.env.STORAGE_TYPE],                              // storageTypes["local"] armazenamento local |  storageTypes["s3"]  armazenamento na amazon
     limits: {                                           //para definir tamanho maximo dos arquivos
-        fileSize: 80 * 1024 * 1024,      //2 megabytes
+        fileSize: 80 * 1024 * 1024,      //80 megabytes
     },
     fileFilter: (req, file, cb) => {                               //para definir o tipo/extensao do arquivo //file é o arquivo //cb é o callback , é uma funcao que vamos chamar assim que terminar a verificação
         const allowedMimes = [
@@ -61,4 +61,4 @@ module.exports = {
             cb(new Error('Invalid file type'))
         }
     }
-} 
+}

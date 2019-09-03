@@ -23,8 +23,9 @@ const ProfileSchema = new mongoose.Schema ({
     },
     profilePicUrl: {
         type: String,
-        default: ""
+        default: "",
     },
+    key: String,
     likes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile',
@@ -38,6 +39,15 @@ const ProfileSchema = new mongoose.Schema ({
         default: Date.now
     }
 })
+
+
+ProfileSchema.pre('save', function(){
+    if(!this.profilePicUrll){
+        this.profilePicUrl = `${process.env.APP_URL}/files/${this.key}`;                        //se tivesse feito array function nao tinha acesso ao this
+    }
+});
+
+
 
 module.exports = mongoose.model('Profile', ProfileSchema);
 

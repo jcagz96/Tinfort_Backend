@@ -1,13 +1,15 @@
 const Profile = require('../models/Profile');
 const bcrypt = require('bcryptjs');
 const Fortnite = require("fortnite-api");
+ 
 const axios = require('axios')
 
 module.exports = {
     async store(req,res){
-
-        const { name, fortniteUsername, password, email, plataform } = req.body;
-        const { location: profilePicUrl = ""} = await req.file;
+        const { key, location: profilePicUrl = ""} = req.file;
+        const { name, fortniteUsername, password, email, plataform, file } = req.body;
+        
+       
 
         console.log(`[ RegisterController.js ]  -  ${name},  ${email}  ,  ${fortniteUsername} , ${password}  ,  ${profilePicUrl} , ${plataform}`);
 
@@ -63,6 +65,7 @@ module.exports = {
                 password : hashedpassword,
                 plataform,
                 profilePicUrl,
+                key,
             })
 
             console.log(`[ RegisterController.js ]  -   Sucess: user registered in database`)
