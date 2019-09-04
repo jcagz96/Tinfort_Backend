@@ -3,7 +3,7 @@ const playersController = require('../controllers/playersController');
 const verify = require('./verifyToken');
 
 
-playersRoutes.get('/ola', verify, playersController.index);
+playersRoutes.get('/', verify, playersController.index);
 
 
 module.exports = playersRoutes;

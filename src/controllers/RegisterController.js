@@ -15,6 +15,18 @@ module.exports = {
 
         var errors = {};
 
+        const userExists = await Profile.findOne({$or: [
+            {email: email},
+            {fortniteUsername: fortniteUsername}
+        ]})
+
+        if (userExists){
+            errors['errorUsername'] = "username or email already registered";
+            return res.json(errors)
+        }
+
+        
+
         let fortniteAPI = new Fortnite(
             [
                 email,
