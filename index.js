@@ -8,6 +8,7 @@ const cors = require('cors')
 const registerRoutes = require('./src/routes/registerRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
 const findUserRoutes = require('./src/routes/findUserRoutes');
+const playersRoutes = require('./src/routes/playersRoutes');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/register', registerRoutes);
 app.use('/login',loginRoutes);
 app.use('/finduser',findUserRoutes);
+app.use('/players',playersRoutes);
 app.use('/files', express.static(path.resolve(__dirname, 'tmp', 'uploads')));
 
 

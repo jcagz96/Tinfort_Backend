@@ -6,3 +6,6 @@ node_modules/
 
 # ficheiro de notas
 notas.txt
+
+#armazenamento local
+tmp/
