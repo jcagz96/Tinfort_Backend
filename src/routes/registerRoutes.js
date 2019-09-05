@@ -7,4 +7,5 @@ const multerConfig = require('../config/multer');
 registerRoutes.post('/', multer(multerConfig).single('file'), RegisterController.store);
 
 
+
 module.exports = registerRoutes;
