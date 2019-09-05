@@ -34,5 +34,4 @@ FORTNITE_CLIENT_TOKEN = <your FORTNITE_CLIENT_TOKEN>
 ```
 
 ## Register route( example with Insomnia)
-![alt text](<a href="https://ibb.co/DgqYJ1b"><img src="https://i.ibb.co/0VwK7nX/register.png" alt="register" border="0"></a>)
-<a href="https://ibb.co/DgqYJ1b"><img src="https://i.ibb.co/0VwK7nX/register.png" alt="register" border="0"></a>
+<a href="https://ibb.co/DgqYJ1b"><img src="https://i.ibb.co/0VwK7nX/register.png"  width="1000" height="600" alt="register" border="0"></a>
