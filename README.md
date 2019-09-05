@@ -32,3 +32,6 @@ FORTNITE_TRN_API_KEY = < your KEY>
 CLIENT_LAUNCHER_TOKEN = <your CLIENT_LAUNCHER_TOKEN>
 FORTNITE_CLIENT_TOKEN = <your FORTNITE_CLIENT_TOKEN>
 ```
+
+## Register route( example with Insomnia)
+![alt text](https://ibb.co/DgqYJ1b)
