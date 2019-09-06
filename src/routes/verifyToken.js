@@ -3,7 +3,9 @@ const jwt =  require('jsonwebtoken')
 //Middleware
 
 module.exports = function(req, res, next){
-    const token = req.header('auth-token')
+    const token = req.header('auth_token')
+
+    //console.log(`[ verifytoken.js ]  -  ${token}`)
 
     if( !token ) { return res.status(401).send('Access Denied') }          //checkando se o header tem o auth-token 
 

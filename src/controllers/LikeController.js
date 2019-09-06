@@ -14,7 +14,7 @@ module.exports = {
         }
 
         if(targetPlayer.likes.includes(user)){
-            console.log("IT'S A MATCH!!!");
+            console.log(`[ LikeController.js ]  -   IT'S A MATCH!!! Between ${loggedPlayer.fortniteUsername} and ${targetPlayer.fortniteUsername} `);
         }
 
         loggedPlayer.likes.push(targetPlayer._id);

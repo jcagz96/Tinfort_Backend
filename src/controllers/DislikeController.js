@@ -14,7 +14,7 @@ module.exports = {
         }
 
         if(targetPlayer.dislikes.includes(user)){
-            console.log("Both disliked each other");
+            console.log(`[ DislikeController.js ]  -   It's a complete dismatch :( ${loggedPlayer.fortniteUsername} and ${targetPlayer.fortniteUsername} `);
         }
 
         loggedPlayer.dislikes.push(targetPlayer._id);
