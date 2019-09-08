@@ -15,6 +15,22 @@ module.exports = {                                                    // allows 
                 
             ]
         })
-        return res.json(users);
+
+        const url = `${process.env.APP_URL}/finduser`
+
+        var resultado = []
+
+        let i = null;
+        for(i = 0 ; i < users.length ; i++){
+            var response =  await axios.post(url, {
+                username: users[i].fortniteUsername,
+                plataform: users[i].plataform,
+            })
+            resultado.push({info: users[i], stats : response.data})
+        }
+
+        
+
+        return res.json(resultado);
     }
 }
