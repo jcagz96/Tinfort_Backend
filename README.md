@@ -33,6 +33,8 @@ FORTNITE_TRN_API_KEY = < your KEY>
 CLIENT_LAUNCHER_TOKEN = <your CLIENT_LAUNCHER_TOKEN>
 FORTNITE_CLIENT_TOKEN = <your FORTNITE_CLIENT_TOKEN>
 ```
+## images storage
+You can choose store users profile picture in local storage or in AWS s3(if you provide AWS keys in .env file)
 
 ## Register route( example with Insomnia)
 <a href="https://ibb.co/DgqYJ1b"><img src="https://i.ibb.co/0VwK7nX/register.png"  alt="register" border="0"></a>
@@ -47,3 +49,4 @@ auth-token goes also in headers response
 * JWT Authentication
 * Axios
 * Mongoose
+* SocketIO

@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "cls && nodemon index.js"
+    "dev": "cls && nodemon index.js",
+    "mob": "adb reverse tcp:3001 tcp:3001"
   },
   "dependencies": {
     "aws-sdk": "^2.518.0",
@@ -22,6 +23,7 @@
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
     "nodemon": "^1.19.1",
-    "react-native-simple-table": "^0.0.3"
+    "react-native-simple-table": "^0.0.3",
+    "socket.io": "^2.2.0"
   }
 }
