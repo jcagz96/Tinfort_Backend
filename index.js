@@ -10,6 +10,7 @@ const registerRoutes = require('./src/routes/registerRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
 const findUserRoutes = require('./src/routes/findUserRoutes');
 const playersRoutes = require('./src/routes/playersRoutes');
+const chatRoutes = require('./src/routes/ChatRoutes');
 
 const app = express();
 const server = require('http').Server(app)
@@ -43,6 +44,7 @@ app.use('/register', registerRoutes);
 app.use('/login',loginRoutes);
 app.use('/finduser',findUserRoutes);
 app.use('/players',playersRoutes);
+app.use('/chat',chatRoutes);
 app.use('/files', express.static(path.resolve(__dirname, 'tmp', 'uploads')));
 
 
