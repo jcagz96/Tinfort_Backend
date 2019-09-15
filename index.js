@@ -33,7 +33,6 @@ mongoose.connect(process.env.DB_CONNECT,
 app.use((req, res, next) => {
     req.io = io;
     req.connectedUsers = connectedUsers;
-
     return next();
 })
 
