@@ -42,7 +42,7 @@ const ProfileSchema = new mongoose.Schema ({
 
 
 ProfileSchema.pre('save', function(){
-    if(!this.profilePicUrll){
+    if(!this.profilePicUrl){
         this.profilePicUrl = `${process.env.APP_URL}/files/${this.key}`;                        //se tivesse feito array function nao tinha acesso ao this
     }
 });

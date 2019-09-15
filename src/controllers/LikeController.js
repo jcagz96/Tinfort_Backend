@@ -13,7 +13,7 @@ module.exports = {
             return res.status(400).json({error : 'Player Not Exists'});
         }
 
-        if(targetPlayer.likes.includes(user)){
+        if(targetPlayer.likes !== null && targetPlayer.likes.includes(user)){
             console.log(`[ LikeController.js ]  -   IT'S A MATCH!!! Between ${loggedPlayer.fortniteUsername} and ${targetPlayer.fortniteUsername} `);
             const loggedSocket = req.connectedUsers[user];
             const targetSocket = req.connectedUsers[playerId];

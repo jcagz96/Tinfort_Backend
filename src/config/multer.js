@@ -23,7 +23,7 @@ const storageTypes = {
     }),
     s3: multerS3({
         s3: new aws.S3(),
-        bucket: 'uploadexample22',
+        bucket: 'tinfort',
         contentType: multerS3.AUTO_CONTENT_TYPE,    //para que o arquivo seja aberto na browser quando acessado
         acl: 'public-read',
         key: (req, file, cb) =>{
