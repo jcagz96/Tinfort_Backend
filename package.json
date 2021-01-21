@@ -24,6 +24,6 @@
     "multer-s3": "^2.9.0",
     "nodemon": "^1.19.1",
     "react-native-simple-table": "^0.0.3",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.4.0"
   }
 }
